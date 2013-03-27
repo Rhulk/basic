@@ -63,18 +63,29 @@ public class ServerBasic {
                         System.out.println("Socket guardado....");
                     }else{
                         if(accion.equals("peticion")){
-                           dos_SC.writeUTF("vamos mandame la imagen");// mandamos el foco al clientePetecion para que nos mande la imagen
-                           entrada_imagen = new ObjectInputStream( sk_in.getInputStream() );  // Para obtener la imagen"Cliente peticion".
-                           leerImagenCliente();
-                           sk_cr = linkedListSocket.getSocketFirst(); // obtenemos el cliente resolutor
-                           dos_CR = new DataOutputStream(sk_cr.getOutputStream());  // Canal para responder a la peticion de Captcha
-                           dis_CR = new DataInputStream(sk_cr.getInputStream());
-                           dos_CR.writeUTF("Captcha..."); // mandamos el foco al cliente resolutor y le mandamos la imagen
-                           enviarImagen(); // como el cliente resolutor ya tiene el foco le mandamos la imagen
-                            String respuesta = dis_CR.readUTF(); // recibimos la respuesta del cliente resolutor
-                            // ahora tenemos que recuperar la conexion con el cliente peticion.
-                            dos_SC.writeUTF(respuesta); // aqui SC es el cliente peticion porque a sido la ultima conexion entrante con el sever SC
-
+                            
+                            dos_SC.writeUTF("vamos mandame la imagen");// mandamos el foco al clientePetecion para que nos mande la imagen
+                            entrada_imagen = new ObjectInputStream( sk_in.getInputStream() );  // Para obtener la imagen"Cliente peticion".
+                            leerImagenCliente();
+//                            linkedListSocket.deleteNULL(); // borrarmos los socket null [ PROBANDO ] ... [KO]
+                            boolean fallo;
+                            do{
+                                fallo=false;
+                                try{
+                                    sk_cr = linkedListSocket.getSocketFirst(); // obtenemos el cliente resolutor
+                                    dos_CR = new DataOutputStream(sk_cr.getOutputStream());  // Canal para responder a la peticion de Captcha
+                                    dis_CR = new DataInputStream(sk_cr.getInputStream());
+                                    dos_CR.writeUTF("Captcha..."); // mandamos el foco al cliente resolutor y le mandamos la imagen
+                                    enviarImagen(); // como el cliente resolutor ya tiene el foco le mandamos la imagen
+                                     String respuesta = dis_CR.readUTF(); // recibimos la respuesta del cliente resolutor
+                                     // ahora tenemos que recuperar la conexion con el cliente peticion.
+                                     dos_SC.writeUTF(respuesta); // aqui SC es el cliente peticion porque a sido la ultima conexion entrante con el sever SC
+                                }
+                                catch (IOException ex){ // si falla la conexion obtenida buscamos otra. [Probando]... [OK]
+                                    System.out.println("Fallo obteniendo Socket");
+                                    fallo=true;
+                                }
+                            } while(fallo);
                         }
                     }
                     linkedListSocket.listSocket();
@@ -86,6 +97,7 @@ public class ServerBasic {
             
         } catch (IOException ex) {
             Logger.getLogger(ServerBasic.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("excepcion... main server");
         }
     }
 
