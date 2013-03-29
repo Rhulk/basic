@@ -43,7 +43,7 @@ public class ServerBasic extends Thread{
     /**
      * @param args the command line arguments
      */
-    public ServerBasic(Socket sk, int id,LinkedListSocket list, ArrayList listaPeti) throws IOException{
+    public ServerBasic(Socket sk, int id,LinkedListSocket list) throws IOException{
         super(""+id); // le damos un nombre al hilo
         System.out.println("Socket sk add: "+ sk_add);
         System.out.println("Nombre del hilo: "+getName ()+". Id del hilo: "+getId()); 
