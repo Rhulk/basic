@@ -10,13 +10,14 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.NoSuchElementException;
 /**
  *
  * Esta clase gestiona las diferentes conexiones entrantes "Socket" de los Clientes Resolutores. Para la app de resolucion de capchas.
  * Añadiendo o borrando dichas conexioens.
  * 
  * @author Enrique Carvajal                 Creada el: 19/03/2013
- *                              Ultima modificacion:   27/03/2013
+ *                              Ultima modificacion:   29/03/2013
  */
 public class LinkedListSocket {
 
@@ -33,16 +34,14 @@ public class LinkedListSocket {
     }
     public synchronized void addSocket(Socket sk){
         linkedListSocket.addLast(sk);
-        System.out.println(linkedListSocket.size());
+        System.out.println("Tamaño del list socket: "+linkedListSocket.size());
+        listSocket();
     }
-    public synchronized void deleteSocketFirst(){
-        linkedListSocket.removeFirst();
-        System.out.println(linkedListSocket.size());
-    }
-    public synchronized Socket getSocketFirst(){
+
+    public synchronized Socket getSocketFirst() throws NoSuchElementException{
         Socket temp= linkedListSocket.getFirst();
         linkedListSocket.removeFirst();
-        System.out.println(linkedListSocket.size());
+        System.out.println("Tamaño del list socket: "+linkedListSocket.size());
         return temp;
     }
     public synchronized void listSocket(){
