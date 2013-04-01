@@ -1,0 +1,139 @@
+package serverbasic;
+
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+public class Servidor extends Thread {
+
+    public static int puerto;
+    public LinkedListSocket linkedListSocket;
+    public ServerSocket ss;
+    public Socket socket;
+
+    public Servidor(int puerto) {
+        // <editor-fold defaultstate="collapsed" desc="Compiled Code">
+        /* 0: aload_0
+         * 1: invokespecial #1                  // Method java/lang/Thread."<init>":()V
+         * 4: iload_1
+         * 5: putstatic     #2                  // Field puerto:I
+         * 8: return
+         *  */
+        // </editor-fold>
+    }
+
+    public Servidor() {
+        // <editor-fold defaultstate="collapsed" desc="Compiled Code">
+        /* 0: aload_0
+         * 1: invokespecial #1                  // Method java/lang/Thread."<init>":()V
+         * 4: return
+         *  */
+        // </editor-fold>
+    }
+
+    public synchronized void run() {
+        // <editor-fold defaultstate="collapsed" desc="Compiled Code">
+        /* 0: getstatic     #3                  // Field java/lang/System.out:Ljava/io/PrintStream;
+         * 3: new           #4                  // class java/lang/StringBuilder
+         * 6: dup
+         * 7: invokespecial #5                  // Method java/lang/StringBuilder."<init>":()V
+         * 10: ldc           #6                  // String Inicializando servidor.  Puerto:
+         * 12: invokevirtual #7                  // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+         * 15: getstatic     #2                  // Field puerto:I
+         * 18: invokevirtual #8                  // Method java/lang/StringBuilder.append:(I)Ljava/lang/StringBuilder;
+         * 21: ldc           #9                  // String  ...
+         * 23: invokevirtual #7                  // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+         * 26: invokevirtual #10                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+         * 29: invokevirtual #11                 // Method java/io/PrintStream.print:(Ljava/lang/String;)V
+         * 32: iconst_0
+         * 33: istore_1
+         * 34: aload_0
+         * 35: new           #12                 // class serverbasic/LinkedListSocket
+         * 38: dup
+         * 39: invokespecial #13                 // Method serverbasic/LinkedListSocket."<init>":()V
+         * 42: putfield      #14                 // Field linkedListSocket:Lserverbasic/LinkedListSocket;
+         * 45: aload_0
+         * 46: new           #15                 // class java/net/ServerSocket
+         * 49: dup
+         * 50: getstatic     #2                  // Field puerto:I
+         * 53: invokespecial #16                 // Method java/net/ServerSocket."<init>":(I)V
+         * 56: putfield      #17                 // Field ss:Ljava/net/ServerSocket;
+         * 59: getstatic     #3                  // Field java/lang/System.out:Ljava/io/PrintStream;
+         * 62: ldc           #18                 // String \t[OK]
+         * 64: invokevirtual #19                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+         * 67: aload_0
+         * 68: aload_0
+         * 69: getfield      #17                 // Field ss:Ljava/net/ServerSocket;
+         * 72: invokevirtual #20                 // Method java/net/ServerSocket.accept:()Ljava/net/Socket;
+         * 75: putfield      #21                 // Field socket:Ljava/net/Socket;
+         * 78: getstatic     #3                  // Field java/lang/System.out:Ljava/io/PrintStream;
+         * 81: new           #4                  // class java/lang/StringBuilder
+         * 84: dup
+         * 85: invokespecial #5                  // Method java/lang/StringBuilder."<init>":()V
+         * 88: ldc           #22                 // String Conected in:
+         * 90: invokevirtual #7                  // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+         * 93: aload_0
+         * 94: getfield      #21                 // Field socket:Ljava/net/Socket;
+         * 97: invokevirtual #23                 // Method java/net/Socket.getRemoteSocketAddress:()Ljava/net/SocketAddress;
+         * 100: invokevirtual #24                 // Method java/lang/StringBuilder.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+         * 103: invokevirtual #10                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+         * 106: invokevirtual #19                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+         * 109: iload_1
+         * 110: ldc           #25                 // int 200000
+         * 112: if_icmpne     117
+         * 115: iconst_0
+         * 116: istore_1
+         * 117: new           #26                 // class serverbasic/ServerBasic
+         * 120: dup
+         * 121: aload_0
+         * 122: getfield      #21                 // Field socket:Ljava/net/Socket;
+         * 125: iload_1
+         * 126: aload_0
+         * 127: getfield      #14                 // Field linkedListSocket:Lserverbasic/LinkedListSocket;
+         * 130: invokespecial #27                 // Method serverbasic/ServerBasic."<init>":(Ljava/net/Socket;ILserverbasic/LinkedListSocket;)V
+         * 133: invokevirtual #28                 // Method serverbasic/ServerBasic.start:()V
+         * 136: iinc          1, 1
+         * 139: goto          67
+         * 142: astore_2
+         * 143: ldc_w         #30                 // class serverbasic/Servidor
+         * 146: invokevirtual #31                 // Method java/lang/Class.getName:()Ljava/lang/String;
+         * 149: invokestatic  #32                 // Method java/util/logging/Logger.getLogger:(Ljava/lang/String;)Ljava/util/logging/Logger;
+         * 152: getstatic     #33                 // Field java/util/logging/Level.SEVERE:Ljava/util/logging/Level;
+         * 155: aconst_null
+         * 156: aload_2
+         * 157: invokevirtual #34                 // Method java/util/logging/Logger.log:(Ljava/util/logging/Level;Ljava/lang/String;Ljava/lang/Throwable;)V
+         * 160: return
+         * Exception table:
+         * from    to  target type
+         * 34   142   142   Class java/io/IOException
+         *  */
+        // </editor-fold>
+    }
+
+    public void desconectar() throws IOException {
+        // <editor-fold defaultstate="collapsed" desc="Compiled Code">
+        /* 0: aload_0
+         * 1: getfield      #21                 // Field socket:Ljava/net/Socket;
+         * 4: invokevirtual #35                 // Method java/net/Socket.close:()V
+         * 7: aload_0
+         * 8: getfield      #21                 // Field socket:Ljava/net/Socket;
+         * 11: invokevirtual #35                 // Method java/net/Socket.close:()V
+         * 14: aload_0
+         * 15: getfield      #21                 // Field socket:Ljava/net/Socket;
+         * 18: invokevirtual #36                 // Method java/net/Socket.shutdownOutput:()V
+         * 21: return
+         *  */
+        // </editor-fold>
+    }
+
+    public static void main(String[] arg) {
+        // <editor-fold defaultstate="collapsed" desc="Compiled Code">
+        /* 0: new           #30                 // class serverbasic/Servidor
+         * 3: dup
+         * 4: invokespecial #37                 // Method "<init>":()V
+         * 7: invokevirtual #38                 // Method start:()V
+         * 10: return
+         *  */
+        // </editor-fold>
+    }
+}
