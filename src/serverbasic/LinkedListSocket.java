@@ -33,23 +33,14 @@ public class LinkedListSocket {
         linkedListSocket = new LinkedList();
     }
     public synchronized void addSocket(Socket sk){
-        linkedListSocket.addLast(sk);
-        System.out.println("Tamaño del list socket: "+linkedListSocket.size());
-        listSocket();
+
     }
 
     public synchronized Socket getSocketFirst() throws NoSuchElementException{
-        Socket temp= linkedListSocket.getFirst();
-        linkedListSocket.removeFirst();
-        System.out.println("Tamaño del list socket: "+linkedListSocket.size());
-        return temp;
+
     }
     public synchronized void listSocket(){
-      System.out.println( "La lista es la siguiente" );
-      List lista2 = new ArrayList(linkedListSocket);
-      Iterator it = lista2.iterator();
-      while (it.hasNext()){
-           System.out.println(it.next()+"");
+System.out.println(it.next()+"");
        }        
     }
     
